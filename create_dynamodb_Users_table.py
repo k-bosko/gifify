@@ -1,5 +1,5 @@
 import boto3
-import key_config as keys
+import gifify_config as keys
 
 TABLE_NAME = 'Gifify-users'
 
@@ -19,14 +19,14 @@ def main():
             TableName=TABLE_NAME,
             KeySchema=[
                 {
-                    'AttributeName': 'email',
+                    'AttributeName': 'user_id',
                     'KeyType': 'HASH'
                 }
 
             ],
             AttributeDefinitions=[
                     {
-                    'AttributeName': 'email',
+                    'AttributeName': 'user_id',
                     'AttributeType': 'S'
                 }
             ],

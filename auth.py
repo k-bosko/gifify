@@ -1,20 +1,11 @@
-from flask import Blueprint, render_template, request, redirect, url_for
-from werkzeug.security import generate_password_hash, check_password_hash
-from uuid import uuid4
+# from uuid import uuid4
 import boto3
-from . import key_config as keys
-from boto3.dynamodb.conditions import Key, Attr
-from flask_login import login_user, logout_user, login_required
+from flask import Blueprint, redirect, render_template, request, url_for
+from flask_login import login_required, login_user, logout_user
+
+from .utils import User, signup_new_user, validate_user_data
 
 auth = Blueprint('auth', __name__)
-
-USER_TABLE = 'Gifify-users'
-
-dynamodb = boto3.resource('dynamodb',
-                    aws_access_key_id=keys.ACCESS_KEY_ID,
-                    aws_secret_access_key=keys.ACCESS_SECRET_KEY,
-                    aws_session_token=keys.AWS_SESSION_TOKEN,
-                    region_name=keys.REGION)
 
 @auth.route('/signup')
 def signup():
@@ -23,31 +14,23 @@ def signup():
 
 @auth.route('/signup', methods=['POST'])
 def signup_post():
-    name = request.form['name']
+    username = request.form['username']
     email = request.form['email']
     password = request.form['password']
-    password_hashed = generate_password_hash(password, method='sha256')
-    userId = str(uuid4())
 
-    # check if user with this email already exists
-    response = table.query(
-                KeyConditionExpression=Key('email').eq(email)
-    )
+    # validate data
+    if not validate_user_data(email, password):
+        return redirect(url_for('auth.login')) # TODO add message about bad input and render template
 
-    # if such user exists, redirect to login
-    if response:
-        return redirect(url_for('auth.login'))
+    is_new_user = signup_new_user(username, email, password)
 
-    table = dynamodb.Table(USER_TABLE)
-    table.put_item(
-            Item={
-                    'userID': userId,
-                    'name': name,
-                    'email': email,
-                    'password': password_hashed
-                }
-    )
-    return redirect(url_for('auth.login'))
+    if is_new_user:
+        user = User(email, password)
+        login_user(user)
+        # print(f'user is ok - {user.is_authenticated}')
+        return redirect(url_for('main.profile'))
+    else:
+        return redirect(url_for('auth.login')) # TODO add message that user exists and render template
 
 
 @auth.route('/login')
@@ -59,35 +42,24 @@ def login():
 def login_post():
     email = request.form.get('email')
     password = request.form.get('password')
-    remember = True if request.form.get('remember') else False
+    remember_me = True if request.form.get('remember') else False
 
-    user = User(email)
-    if user.verify_password(password):
-        login_user(user, remember)
-        return redirect(url_for('main.profile]'))
+    # validate data
+    if not validate_user_data(email, password):
+        return redirect(url_for('auth.login')) # TODO add message that no user info is entered and render template
 
-    return render_template('login.html')
+    user = User(email, password)
+    # print(f'user is ok - {user.is_authenticated}')
 
-    # table = dynamodb.Table(USER_TABLE)
-    # response = table.query(
-    #             KeyConditionExpression=Key('email').eq(email)
-    # )
-    # if response:
-    #     items = response['Items']
-    #     if check_password_hash(items[0]['password'], password):
+    if user.is_authenticated:
+        login_user(user, remember_me)
+        return redirect(url_for('main.profile'))
 
-    #         login_user(user, remember=remember) #TODO get user from response?
-    #         return redirect('main.profile')
-    #     else:
-    #         msg = "Incorrect password. Try again."
-    #         return render_template('login.html', msg=msg)
-    # else:
-    #     return redirect(url_for('auth.signup'))
-
+    return render_template('login.html') # TODO add message why can't login
 
 
 @auth.route('/logout')
 @login_required
 def logout():
     logout_user()
-    return redirect('main.index')
+    return redirect(url_for('main.index'))

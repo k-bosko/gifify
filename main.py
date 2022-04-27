@@ -10,6 +10,7 @@ def index():
 @main.route('/profile')
 @login_required
 def profile():
-    return render_template('profile.html', name=current_user.name)
+    print(f'username - {current_user.username}')
+    return render_template('profile.html', username=current_user.username)
 
 

@@ -14,7 +14,7 @@
 <body>
     <div>
         <nav class="navbar navbar-light navbar-expand-md navigation-clean">
-            <div class="container"><a class="navbar-brand" href="{{url_for('login')}}" style="color:#b6d781;">Gifify</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="container"><a class="navbar-brand" href="{{url_for('auth.login')}}" style="color:#b6d781;">Gifify</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                 <div
                     class="collapse navbar-collapse" id="navcol-1"></div>
     </div>
@@ -23,13 +23,13 @@
     <div class="photo-gallery">
         <div class="container">
             <div class="intro">
-                <h2 class="text-center">Welcome {{name}} &nbsp;</h2>
+                <h2 class="text-center">Welcome {{username}} &nbsp;</h2>
                 <!-- <p class="text-center">This is your homepage</p> -->
             </div>
             <div class="row">
                 <div class="card" style="width:400px">
                     <div class="card-body ">
-                      <form action="/upload" method="post" enctype="multipart/form-data">
+                      <form action="/upload" method="POST" enctype="multipart/form-data">
                       <p class="card-text">Upload a video file</p>
                         <input type="file" name="file" value="file">
                         <hr>
@@ -41,7 +41,7 @@
 
                 <div class="card" style="width:400px">
                     <div class="card-body ">
-                      <form action="/upload" method="post" enctype="multipart/form-data">
+                      <form action="/upload" method="POST" enctype="multipart/form-data">
                       <p class="card-text">Download your gif</p>
                       <input type="submit" name="download" value="Download" class="btn btn-success">
                       </form>
