@@ -7,7 +7,7 @@ from .utils import User
 def create_app():
     app = Flask(__name__)
 
-    app.config['SECRET_KEY'] = 'secret_key' #TODO change to cookie
+    app.config['SECRET_KEY'] = 'secret_key' 
 
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'

@@ -10,21 +10,21 @@ def main():
 
     existing_tables = dynamodb_client.list_tables()['TableNames']
 
-    if gifify_config.USERDATA_TABLE not in existing_tables:
-        print(f"creating DynamoDB table={gifify_config.USERDATA_TABLE}")
+    if gifify_config.USER_TABLE not in existing_tables:
+        print(f"creating DynamoDB table={gifify_config.USER_TABLE}")
         # Create the DynamoDB table.
         table = dynamodb_client.create_table(
-            TableName=gifify_config.USERDATA_TABLE,
+            TableName=gifify_config.USER_TABLE,
             KeySchema=[
                 {
-                    'AttributeName': 'user_id',
+                    'AttributeName': 'email',
                     'KeyType': 'HASH'
                 }
 
             ],
             AttributeDefinitions=[
                     {
-                    'AttributeName': 'user_id',
+                    'AttributeName': 'email',
                     'AttributeType': 'S'
                 }
             ],
@@ -36,10 +36,10 @@ def main():
 
         # Wait until the table exists.
         print("waiting for table to be created...")
-        dynamodb_client.get_waiter('table_exists').wait(TableName=gifify_config.USERDATA_TABLE)
-        print(f"created table {gifify_config.USERDATA_TABLE}")
+        dynamodb_client.get_waiter('table_exists').wait(TableName=gifify_config.USER_TABLE)
+        print(f"created table {gifify_config.USER_TABLE}")
     else:
-        print(f"table {gifify_config.USERDATA_TABLE} exists")
+        print(f"table {gifify_config.USER_TABLE} exists")
 
 if __name__ == '__main__':
     main()

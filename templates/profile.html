@@ -13,12 +13,25 @@
 
 <body>
     <div>
-        <nav class="navbar navbar-light navbar-expand-md navigation-clean">
-            <div class="container"><a class="navbar-brand" href="{{url_for('auth.login')}}" style="color:#b6d781;">Gifify</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-                <div
-                    class="collapse navbar-collapse" id="navcol-1"></div>
-    </div>
-    </nav>
+        <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
+            <div class="container">
+                <a class="navbar-brand" href="{{url_for('main.index')}}" style="color:#aedc8a;">Gifify</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse justify-content-right" id="collapsibleNavbar">
+                    <ul class="navbar-nav ms-2 align-items-end">
+                        <li>
+                            <a class="btn btn-light action-button mr-2" role="button" href="{{url_for('main.account')}}"
+                                style="background-color:#aedc8a;">Account</a>
+                        </li>
+                        <li>
+                            <a class="btn btn-light action-button" role="button" href="{{url_for('auth.logout')}}" style="background-color:#aedc8a;">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </div>
     <div class="photo-gallery">
         <div class="container">
