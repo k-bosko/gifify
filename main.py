@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request
 from flask_login import login_required, current_user
-from .utils import s3_upload, get_uploaded_files_from_s3
+from .utils import s3_upload, get_uploaded_files_from_s3, get_gifs_from_s3
 
 main = Blueprint('main', __name__)
 
@@ -35,10 +35,13 @@ def upload():
         # msg = "Uploaded"
         uploaded_files = get_uploaded_files_from_s3(current_user)
     else:
-        msg = "Upload failed" #TODO add explanation what files can be uploaded + optionally add size limitations
-    return render_template("profile.html",msg =msg, uploaded_files=uploaded_files)
+        #TODO add explanation what files can be uploaded + optionally add size limitations
+        msg = "Upload failed"
+    return render_template("profile.html",msg =msg, username=current_user.username, uploaded_files=uploaded_files)
 
 @main.route('/pull_links')
 @login_required
 def pull_links():
-    
+    # get user data
+    user_gifs = get_gifs_from_s3(current_user)
+    return user_gifs

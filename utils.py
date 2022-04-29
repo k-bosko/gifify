@@ -3,29 +3,14 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from . import gifify_config
 from flask_login import UserMixin
 from uuid import uuid4
-import time
-import datetime
-
-# TODO change aws access info to dict and use **access_keys instead
-# dynamodb = boto3.resource('dynamodb',
-#             aws_access_key_id=gifify_config.ACCESS_KEY_ID,
-#             aws_secret_access_key=gifify_config.ACCESS_SECRET_KEY,
-#             aws_session_token=gifify_config.AWS_SESSION_TOKEN,
-#             region_name=gifify_config.REGION)
-
-# s3_client = boto3.client('s3', aws_access_key_id = gifify_config.ACCESS_KEY_ID,
-#                         aws_secret_access_key = gifify_config.ACCESS_SECRET_KEY,
-#                         aws_session_token = gifify_config.AWS_SESSION_TOKEN,
-#                         region_name=gifify_config.REGION)
-
-# s3_resource = boto3.resource('s3', aws_access_key_id = gifify_config.ACCESS_KEY_ID,
-#                         aws_secret_access_key = gifify_config.ACCESS_SECRET_KEY,
-#                         aws_session_token = gifify_config.AWS_SESSION_TOKEN,
-#                         region_name=gifify_config.REGION)
+# import time
+# import datetime
+import os
 
 dynamodb = boto3.resource('dynamodb', **gifify_config.access_credentials)
 s3_client = boto3.client('s3', **gifify_config.access_credentials)
 s3_resource = boto3.resource('s3', **gifify_config.access_credentials)
+
 
 class User(UserMixin):
     """
@@ -144,6 +129,17 @@ def get_uploaded_files_from_s3(current_user):
         filename = key.split('/')[-1]
         uploaded_files.append(filename)
     return uploaded_files
+
+def get_gifs_from_s3(current_user):
+    download_bucket = s3_resource.Bucket(gifify_config.DOWNLOAD_BUCKET)
+    gif_links = {}
+    for obj in download_bucket.objects.filter(Prefix=current_user.user_id):
+        filename = os.path.basename(obj.key)
+        presigned_url = s3_client.generate_presigned_url('get_object', Params = {'Bucket':
+                                                download_bucket.name, 'Key': obj.key}, ExpiresIn = 3600)
+        gif_links[filename] = presigned_url
+
+    return gif_links
 
 
 

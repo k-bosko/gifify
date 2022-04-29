@@ -1,12 +1,14 @@
 function populateLinks(elementSelector, links) {
     const downloadLinksEl = $(elementSelector)
     downloadLinksEl.html('')
-    for ( const link of links ) {
+    for ( const [filename, url] of Object.entries(links) ) {
+        const liEl = document.createElement('li')
         const linkEl = document.createElement('a')
-        linkEl.href = link.url
-        linkEl.innerText = link.name
+        liEl.appendChild(linkEl)
+        downloadLinksEl.append(liEl)
 
-        downloadLinksEl.append(linkEl)
+        linkEl.href = url
+        linkEl.innerText = filename
     }
 }
 
@@ -15,7 +17,7 @@ function requestToPull() {
         url: "/pull_links",
         success: function( result ) {
         //   populateLinks("#upload-links", result.uploads)
-          populateLinks("#download-links", result.downloads)
+          populateLinks("#download-links", result)
         }
       });
 }

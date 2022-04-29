@@ -1,8 +1,3 @@
-# ACCESS_KEY_ID="ASIAXWSOBH3NTD42TREB"
-# ACCESS_SECRET_KEY="6d7uKHx4nO7TEIufZsuRD7TLBRi+BTWnQ1xuunAY"
-# AWS_SESSION_TOKEN="FwoGZXIvYXdzEEoaDJWLhUrQbLWgTD+L5yLJAfznm7S0zQbFluXUJwn37xGopFgau///3uxFLhKL8PUMSDrS03Duy2Xg/3hCm7yuJQfIce1kPkH++UMWlYNN5EGIi/96emBWCdNnh2b5V07tsEFsIJfl8z4/jDDkkjDNuRfcvfpq69hyozW5kX1VSqUXg1azcRH7IUZNVg592K8HOMGfTaUoprkKdWiDboA75S2C/K/pOVIgxTvwsz6iVoNZu6sJlv4B5j2zPjfQXHk8t+ahpJS1ojOEJKn/GN0eKToZ/mkTM+OvKyiLprCTBjIt9CCWNTUboSxUHnhtRHsg92WkX4LqrxvfgBG0LiUCedkhta1WhUrkYB+3KgIe"
-# REGION = 'us-east-1'
-
 access_credentials = {
     "aws_access_key_id": "ASIAXWSOBH3NR4NHO472",
     "aws_secret_access_key": "WdBIJZjx38XSctnm+ylFVMJsKJLBOsVH+6jqx67f",
