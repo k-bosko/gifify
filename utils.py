@@ -98,26 +98,46 @@ def allowed_file(filename):
 def s3_upload(video_file, content_type, current_user):
     filename = video_file.filename
     if video_file and allowed_file(filename):
-        s3_client.put_object(
-            Body=video_file,
-            Bucket = gifify_config.UPLOAD_BUCKET,
-            Key = current_user.user_id + "/" + filename,
-            ContentType=content_type
-        )
         ts=time.time()
         timestamp = datetime.datetime.\
                     fromtimestamp(ts).\
                     strftime('%Y-%m-%d %H:%M:%S')
+        key = current_user.user_id + "/" + timestamp + "/" + filename
+        s3_client.put_object(
+            Body=video_file,
+            Bucket = gifify_config.UPLOAD_BUCKET,
+            Key = key,
+            ContentType=content_type
+        )
+
         table = dynamodb.Table(gifify_config.USERDATA_TABLE)
 
         #TODO check if mov file already exists?
         table.put_item(
         Item={
                 'user_id': current_user.user_id,
-                'filename': filename,
                 'timestamp': timestamp,
-                'key': current_user.user_id + "/" + filename,
+                'filename': filename,
+                'key': key,
             }
     )
         return True
     return False
+
+def get_gif_key_from_dynamodb(current_user):
+    table = dynamodb.Table(gifify_config.USERDATA_TABLE)
+    userdata = table.get_item(Key={'user_id': current_user.user_id})
+    
+
+
+
+def s3_download(current_user, local_folder):
+    try:
+        s3 = boto3.resource('s3')
+        key = get_gif_key_from_dynamodb(current_user)
+        s3.meta.client.download_file(gifify_config.DOWNLOAD_BUCKET, key, local_folder)
+        return True
+    except:
+        return False
+    # bucket = s3.Bucket(gifify_config.DOWNLOAD_BUCKET)
+    # bucket.download_file(file_object, '/tmp/{}'.format(file_name))

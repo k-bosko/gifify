@@ -35,3 +35,41 @@ def upload():
     else:
         msg = "Upload failed" #TODO add explanation what files can be uploaded + optionally add size limitations
     return render_template("profile.html",msg =msg)
+
+@main.route('/pull_links')
+@login_required
+def pull_links():
+    # get user data
+    result_dict = {
+        'uploads': [
+            {
+                'name': 'dogs.mov',
+                'timestamp': '2012-01-01',
+                'url': 'https://example.com/uploads/2012-01-01/dogs.mov'
+            },
+        ],
+        'downloads': [
+            {
+                'name': 'dogs.gif',
+                'timestamp': '2012-01-02',
+                'url': 'https://example.com/uploads/2012-01-02/dogs.gif'
+            },
+        ]
+    }
+    return result_dict
+
+# @main.route('/download')
+# @login_required
+# def download():
+#     '''
+#     Download gif from S3 out bucket
+#     '''
+
+#     is_downloaded = s3_download(video_file, content_type, current_user)
+
+#     if is_downloaded:
+#         msg = "Downloaded"
+#         # write to DB
+#     else:
+#         msg = "Download failed" #TODO add explanation what files can be uploaded + optionally add size limitations
+#     return render_template("profile.html",msg =msg)
