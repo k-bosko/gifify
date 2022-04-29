@@ -1,12 +1,12 @@
 function populateLinks(elementSelector, links) {
-    const uploadLinksEl = $(elementSelector)
-    uploadLinksEl.html('')
+    const downloadLinksEl = $(elementSelector)
+    downloadLinksEl.html('')
     for ( const link of links ) {
         const linkEl = document.createElement('a')
         linkEl.href = link.url
         linkEl.innerText = link.name
 
-        uploadLinksEl.append(linkEl)
+        downloadLinksEl.append(linkEl)
     }
 }
 
@@ -14,7 +14,7 @@ function requestToPull() {
     $.ajax({
         url: "/pull_links",
         success: function( result ) {
-          populateLinks("#upload-links", result.uploads)
+        //   populateLinks("#upload-links", result.uploads)
           populateLinks("#download-links", result.downloads)
         }
       });

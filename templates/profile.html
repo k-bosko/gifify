@@ -37,7 +37,6 @@
         <div class="container">
             <div class="intro">
                 <h2 class="text-center">Welcome {{username}} &nbsp;</h2>
-                <!-- <p class="text-center">This is your homepage</p> -->
             </div>
             <div class="row">
                 <div class="card" style="width:400px">
@@ -54,12 +53,16 @@
             </div>
             <div class="row">
                 <div class="col-6">
-                    <h2> Upload Links </h2>
+                    <h2> Uploaded Files </h2>
                     <hr/>
-                    <div id="upload-links"></div>
+                    <div id="upload-links">
+                        {%for file in uploaded_files%}
+                        <li>{{file}}</li>
+                        {%endfor%}
+                    </div>
                 </div>
                 <div class="col-6">
-                    <h2> Download Links </h2>
+                    <h2> Download Gifs </h2>
                     <hr/>
                     <div id="download-links"></div>
                 </div>
