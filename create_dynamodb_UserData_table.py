@@ -15,23 +15,30 @@ def main():
         # Create the DynamoDB table.
         table = dynamodb_client.create_table(
             TableName=gifify_config.USERDATA_TABLE,
+            AttributeDefinitions=[
+                {
+                    'AttributeName': 'user_id',
+                    'AttributeType': 'S',
+                },
+                {
+                    'AttributeName': 'timestamp',
+                    'AttributeType': 'S',
+                },
+            ],
             KeySchema=[
                 {
                     'AttributeName': 'user_id',
-                    'KeyType': 'HASH'
-                }
-
-            ],
-            AttributeDefinitions=[
-                    {
-                    'AttributeName': 'user_id',
-                    'AttributeType': 'S'
-                }
+                    'KeyType': 'HASH',
+                },
+                {
+                    'AttributeName': 'timestamp',
+                    'KeyType': 'RANGE',
+                },
             ],
             ProvisionedThroughput={
                 'ReadCapacityUnits': 5,
-                'WriteCapacityUnits': 5
-            }
+                'WriteCapacityUnits': 5,
+            },
         )
 
         # Wait until the table exists.
