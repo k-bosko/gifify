@@ -1,7 +1,7 @@
 from flask import Blueprint, redirect, render_template, request, url_for
-from flask_login import login_required, login_user, logout_user
+from flask_login import login_required, login_user, logout_user, current_user
 
-from .utils import User, signup_new_user, validate_user_data
+from .utils import User, signup_new_user, validate_user_data, delete_all_userdata
 
 auth = Blueprint('auth', __name__)
 
@@ -59,5 +59,6 @@ def login_post():
 @auth.route('/logout')
 @login_required
 def logout():
+    delete_all_userdata(current_user)
     logout_user()
     return redirect(url_for('main.index'))

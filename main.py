@@ -35,8 +35,8 @@ def upload():
         msg = "Uploaded"
         uploaded_files = get_uploaded_files_from_s3(current_user)
     else:
-        #TODO add explanation what files can be uploaded + optionally add size limitations
-        msg = "Upload failed. Allowed extensions: mov, mpeg"
+        #TODO add explanation what files can be uploaded + optionally add size limitations (currently 200 MB in ngnix config)
+        msg = "Upload failed"
     return render_template("profile.html", msg=msg, username=current_user.username, uploaded_files=uploaded_files)
 
 @main.route('/pull_links')

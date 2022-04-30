@@ -87,7 +87,6 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in gifify_config.ALLOWED_EXTENSIONS
 
-
 def s3_upload(video_file, content_type, current_user):
     filename = video_file.filename
     if video_file and allowed_file(filename):
@@ -114,7 +113,7 @@ def get_uploaded_files_from_s3(current_user):
 def get_gifs_from_s3(current_user):
     upload_bucket = s3_resource.Bucket(gifify_config.UPLOAD_BUCKET)
     uploaded = set()
-    uploaded.add('vasya')
+    # uploaded.add('vasya')
 
     for uploaded_obj in upload_bucket.objects.filter(Prefix=current_user.user_id):
         filename = os.path.basename(uploaded_obj.key)
@@ -143,3 +142,12 @@ def get_gifs_from_s3(current_user):
         }
 
     return gif_links
+
+def delete_all_userdata(current_user):
+    upload_bucket = s3_resource.Bucket(gifify_config.UPLOAD_BUCKET)
+    download_bucket = s3_resource.Bucket(gifify_config.DOWNLOAD_BUCKET)
+    for uploaded_obj in upload_bucket.objects.filter(Prefix=current_user.user_id):
+        uploaded_obj.delete()
+
+    for downloaded_obj in download_bucket.objects.filter(Prefix=current_user.user_id):
+        downloaded_obj.delete()
