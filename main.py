@@ -8,21 +8,16 @@ main = Blueprint('main', __name__)
 def index():
     return render_template('index.html')
 
-@main.route('/profile')
+@main.route('/gifify')
 @login_required
-def profile():
+def gifify():
     uploaded_files = get_uploaded_files_from_s3(current_user)
-    return render_template('profile.html', username=current_user.username, uploaded_files=uploaded_files)
+    return render_template('gifify.html', username=current_user.username, uploaded_files=uploaded_files)
 
 @main.route('/account')
 @login_required
 def account():
     return render_template('account.html', username=current_user.username, email=current_user.id)
-
-@main.route('/delete')
-@login_required
-def delete():
-    return redirect('index.html')
 
 
 @main.route('/upload',methods=['POST'])
@@ -43,7 +38,7 @@ def upload():
     else:
         #TODO add explanation what files can be uploaded
         msg = "Upload failed"
-    return render_template("profile.html", msg=msg, username=current_user.username, uploaded_files=uploaded_files)
+    return render_template("gifify.html", msg=msg, username=current_user.username, uploaded_files=uploaded_files)
 
 @main.route('/pull_links')
 @login_required

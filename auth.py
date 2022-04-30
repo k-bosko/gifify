@@ -1,7 +1,7 @@
 from flask import Blueprint, redirect, render_template, request, url_for
 from flask_login import login_required, login_user, logout_user, current_user
 
-from .utils import User, delete_all_userdata, signup_new_user, validate_user_data, delete_all_userdata
+from .utils import User, delete_all_userdata, signup_new_user, validate_user_data, delete_account
 
 auth = Blueprint('auth', __name__)
 
@@ -26,7 +26,7 @@ def signup_post():
         user = User(email, password)
         login_user(user)
         # print(f'user is ok - {user.is_authenticated}')
-        return redirect(url_for('main.profile'))
+        return redirect(url_for('main.gifify'))
     else:
         return redirect(url_for('auth.login')) # TODO add message that user exists and render template
 
@@ -51,7 +51,7 @@ def login_post():
 
     if user.is_authenticated:
         login_user(user, remember_me)
-        return redirect(url_for('main.profile'))
+        return redirect(url_for('main.gifify'))
 
     return render_template('login.html') # TODO add message why can't login
 
@@ -60,5 +60,12 @@ def login_post():
 @login_required
 def logout():
     delete_all_userdata(current_user)
+    logout_user()
+    return redirect(url_for('main.index'))
+
+@auth.route('/delete')
+@login_required
+def delete():
+    delete_account(current_user)
     logout_user()
     return redirect(url_for('main.index'))

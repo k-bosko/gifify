@@ -151,3 +151,7 @@ def delete_all_userdata(current_user):
 
     for downloaded_obj in download_bucket.objects.filter(Prefix=current_user.user_id):
         downloaded_obj.delete()
+
+def delete_account(current_user):
+    table = dynamodb.Table(gifify_config.USER_TABLE)
+    table.delete_item(Key={'email': current_user.id})
