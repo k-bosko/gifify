@@ -1,7 +1,7 @@
 access_credentials = {
-    "aws_access_key_id": "ASIAXWSOBH3NUQK2KBG5",
-    "aws_secret_access_key": "Vy1ia3/9mPUoqLCyBP1a4AS78jru4wqvFhp6P7aw",
-    "aws_session_token": "FwoGZXIvYXdzEFcaDEpTrqMxh5SvAmyaISLJATrFJWIvARBpxXWLxZ8pllZlXP8B3xZvJMets/RJjWQoEbuwoRIzrpZ213ohNuoB75kgQIyBXkcGPb+KBaa5PJmS9iWtg96VQePsd5fqoNrQy6fvm9M3kaoyeI1w20AKnTff5HIpyYeqWciObi9jZekdMRICzUIrjlKu4eHXUba2VrvwRZXmw1ci1n1xOuy4PCXE+kJsuklnanXXRKWIWDUKqTsycm5ds9gQHjwVV5nUcbF5MezC1LCmaXpdUI0m1HkNcs21mI4fRyiyjLOTBjItl49IpwFOv8m2C//UTTsZTyweU3uj4IdXwXwEVQgGRjbFyhJOKDafgADfs34i",
+    "aws_access_key_id": "ASIAXWSOBH3NR5IAKHZ4",
+    "aws_secret_access_key": "PlsdpEXeSVbXwJX3K7Mz7Vkc4RmlYGR627y6weYy",
+    "aws_session_token": "FwoGZXIvYXdzEGIaDMX9bgEogzGgRaJd1CLJAb9aa9AZgE+mBamsw9y7tykmfMf8zBxxmhX20ZRVLJh/jkeRMHt1Tv1Wz9pqPtUVWfjkxzbGqhQqEwE+JGVjb/OQFWhEB8/opMpnR1aHAupNEfPeNhjhHoWkvMtBh0Xr1JLfJ+EQlKPjY6cTDCfdx8fbyzMpbAhQ6x+BzGNZaK+TjqIA5rPrqK6fqBmVOO/c7Wlbyag1BgkbeV435Dx+wUUT7B9oGc/BEa3TNt7orB9S1QvGSPAN4RD6UPwKfhjgwWYheG6va05JByihy7WTBjItlJHU63IhUSianOdOXfoDbP5a1KB4ya2d8Qq2cIs73gSrL/0ngPyCSsMePOpR",
     "region_name": "us-east-1"
 }
 

@@ -1,7 +1,7 @@
 from flask import Blueprint, redirect, render_template, request, url_for
 from flask_login import login_required, login_user, logout_user, current_user
 
-from .utils import User, signup_new_user, validate_user_data, delete_all_userdata
+from .utils import User, delete_all_userdata, signup_new_user, validate_user_data, delete_all_userdata
 
 auth = Blueprint('auth', __name__)
 

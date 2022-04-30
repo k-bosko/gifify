@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect
 from flask_login import login_required, current_user
 from .utils import s3_upload, get_uploaded_files_from_s3, get_gifs_from_s3
 
@@ -17,7 +17,13 @@ def profile():
 @main.route('/account')
 @login_required
 def account():
-    return render_template('account.html')
+    return render_template('account.html', username=current_user.username, email=current_user.id)
+
+@main.route('/delete')
+@login_required
+def delete():
+    return redirect('index.html')
+
 
 @main.route('/upload',methods=['POST'])
 @login_required
@@ -35,7 +41,7 @@ def upload():
         msg = "Uploaded"
         uploaded_files = get_uploaded_files_from_s3(current_user)
     else:
-        #TODO add explanation what files can be uploaded + optionally add size limitations (currently 200 MB in ngnix config)
+        #TODO add explanation what files can be uploaded
         msg = "Upload failed"
     return render_template("profile.html", msg=msg, username=current_user.username, uploaded_files=uploaded_files)
 

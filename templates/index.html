@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gifify Create Account</title>
+    <title>Gifify App Description</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
@@ -36,9 +36,26 @@
     </div>
     <div class="register-photo">
         <div class="form-container">
-            <div class="image-holder">
-                <p>Here will be a description of Gifify app</p>
-            </div>
+            <div class="jumbotron" style="background-color:#ffffff;" >
+                <img src='/static/images/gif_logo_v2.png' style='width: 7em; height: 7em;' class="mx-auto d-block"  alt="Gifify logo"></img>
+                <h1 class="display-4 d-flex justify-content-center">Gifify your videos</h1>
+                <p class="lead">This is our final project for CS6620 Foundations of Cloud Computing at Northeastern University.
+                    A Gifify app is a web app that runs on AWS where everybody can upload a video and download a gif file.
+                    You will need to sign up first in order to use this app.</p>
+                <hr class="my-4">
+                <h5 class="lead">How to use:</h5>
+                    <ol>
+                        <li class="lead">Upload a video file.</li>
+                        <li class="lead">Wait for a gif to generate.</li>
+                    </ol>
+                    <p class="lead">Allowed extensions: mov, mp4, wmv, avi, flv, m4p, mpg, mpeg, mpv, 3gp, 3g2, webm</p>
+                    <p class="lead">Allowed file size: Up to 200 MB</p>
+                    <p class="lead">The maximum wait time for processing your video file is 15 min.</p>
+                    <p class="lead">Please save all your generated gifs locally before logging out. The user data generated during session is deleted after you logout.</p></p>
+                <p class="lead">
+                  <a class="btn btn-warning btn-lg" href="{{url_for('auth.signup')}}" role="button">Sign up now</a>
+                </p>
+              </div>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
