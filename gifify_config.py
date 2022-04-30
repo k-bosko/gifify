@@ -1,12 +1,11 @@
 access_credentials = {
-    "aws_access_key_id": "ASIAXWSOBH3NR4NHO472",
-    "aws_secret_access_key": "WdBIJZjx38XSctnm+ylFVMJsKJLBOsVH+6jqx67f",
-    "aws_session_token": "FwoGZXIvYXdzEE4aDAsbdV/csoPP958+yCLJAeU7illGy654Unsor1gJRDXKZemGXifSldeezb+LqoKdDw7b0vTKTAmxh4fezApKfolrVPOtfwMHQMnUqnJzGaZJb0TauilUfhuyKUlzpyIXPBprikxskqutbu9/q5CRSs38f8uO+tNusIWekbJ/r+FqemyduQ33ybrSl3RVG6ohn05KchFOeK1YKK8tOR0esJZwXUO1yt8RR5zXV9CRMwF4bb0yeqsI0tte7DBYxzvODVExiAgy1hxmXAEmih7Cj9Kd+J4fgT+QryiFmbGTBjItGv9mKTixPLoP3zi5cwpSiwSkT0J6oMokBr9JVWL4gcVA0DCnUxpxKspYeIg6",
+    "aws_access_key_id": "ASIAXWSOBH3NX6F4KEXU",
+    "aws_secret_access_key": "sNb/U4sOjRtjZnc0o/OqTW8Rsdv5KG+Zw0b0JQlQ",
+    "aws_session_token": "FwoGZXIvYXdzEFMaDD+cxziozPOwAUCgUSLJAdICGMZ2BOpsjplR+VR7saYXlz2bp/NP2pQBqq+7issC4y6liP6CVZ+UJpjg6hGPxmo+lKtUEU6Bqz4hFReShJ794TD57dIFkBl74T7qiuiTwI1wnI+vWEzs4oJH/u3O5BWE6usoFCbJFkdduLHcM7bibxpd2JShEfaM36IBgby642KZ8fqsw1gKC7iojDjpbeCrlQmlqKJo9UdBf0eFJIGWo520y5JMuX/x0CIQLJGOenD86bynWwYJCWy3elwy+mm32QtH+OG64CjAm7KTBjItVb8poqgr2EpNU5vIsE1I8dCR+izQ+CLUtaRJszEqvs6rNOOivAmkcwqI6yH+",
     "region_name": "us-east-1"
 }
 
 USER_TABLE = 'Gifify-users'
-USERDATA_TABLE = 'Gifify-userdata'
 UPLOAD_BUCKET = 'gifify-src-kbosko'
 DOWNLOAD_BUCKET = 'gifify-out-kbosko'
 

@@ -3,8 +3,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from . import gifify_config
 from flask_login import UserMixin
 from uuid import uuid4
-# import time
-# import datetime
 import os
 
 dynamodb = boto3.resource('dynamodb', **gifify_config.access_credentials)
@@ -93,11 +91,6 @@ def allowed_file(filename):
 def s3_upload(video_file, content_type, current_user):
     filename = video_file.filename
     if video_file and allowed_file(filename):
-        # ts=time.time()
-        # timestamp = datetime.datetime.\
-        #             fromtimestamp(ts).\
-        #             strftime('%Y-%m-%d %H:%M:%S')
-        # key = current_user.user_id + "/" + timestamp + "/" + filename
         key = current_user.user_id + "/" + filename
         s3_client.put_object(
             Body=video_file,
@@ -105,18 +98,6 @@ def s3_upload(video_file, content_type, current_user):
             Key = key,
             ContentType=content_type
         )
-
-        # table = dynamodb.Table(gifify_config.USERDATA_TABLE)
-
-        #TODO check if mov file already exists?
-        # table.put_item(
-        # Item={
-        #         'user_id': current_user.user_id,
-        #         'timestamp': timestamp,
-        #         'filename': filename,
-        #         'key': key,
-        #     }
-        # )
         return True
     return False
 
@@ -140,7 +121,3 @@ def get_gifs_from_s3(current_user):
         gif_links[filename] = presigned_url
 
     return gif_links
-
-
-
-

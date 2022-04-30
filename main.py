@@ -29,15 +29,15 @@ def upload():
     video_file = request.files['file']
 
     is_uploaded = s3_upload(video_file, content_type, current_user)
-    uploaded_files = []
+    uploaded_files = get_uploaded_files_from_s3(current_user)
     msg = ''
     if is_uploaded:
-        # msg = "Uploaded"
+        msg = "Uploaded"
         uploaded_files = get_uploaded_files_from_s3(current_user)
     else:
         #TODO add explanation what files can be uploaded + optionally add size limitations
-        msg = "Upload failed"
-    return render_template("profile.html",msg =msg, username=current_user.username, uploaded_files=uploaded_files)
+        msg = "Upload failed. Allowed extensions: mov, mpeg"
+    return render_template("profile.html", msg=msg, username=current_user.username, uploaded_files=uploaded_files)
 
 @main.route('/pull_links')
 @login_required
