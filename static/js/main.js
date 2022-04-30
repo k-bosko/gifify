@@ -1,14 +1,20 @@
 function populateLinks(elementSelector, links) {
     const downloadLinksEl = $(elementSelector)
     downloadLinksEl.html('')
-    for ( const [filename, url] of Object.entries(links) ) {
+    for ( const [filename, data] of Object.entries(links) ) {
         const liEl = document.createElement('li')
-        const linkEl = document.createElement('a')
-        liEl.appendChild(linkEl)
         downloadLinksEl.append(liEl)
-
-        linkEl.href = url
-        linkEl.innerText = filename
+        if ( data.expected ) {
+          const spinnerEl = document.createElement('div')
+          spinnerEl.innerHTML =
+            `${filename} <img src='/static/images/spinner.gif' style='width: 1.5em; height: 1.5em;'></img>`
+          liEl.appendChild(spinnerEl)
+        } else {
+          const linkEl = document.createElement('a')
+          liEl.appendChild(linkEl)
+          linkEl.href = data.url
+          linkEl.innerText = filename
+        }
     }
 }
 
@@ -16,7 +22,6 @@ function requestToPull() {
     $.ajax({
         url: "/pull_links",
         success: function( result ) {
-        //   populateLinks("#upload-links", result.uploads)
           populateLinks("#download-links", result)
         }
       });

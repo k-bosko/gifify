@@ -112,12 +112,34 @@ def get_uploaded_files_from_s3(current_user):
     return uploaded_files
 
 def get_gifs_from_s3(current_user):
+    upload_bucket = s3_resource.Bucket(gifify_config.UPLOAD_BUCKET)
+    uploaded = set()
+    uploaded.add('vasya')
+
+    for uploaded_obj in upload_bucket.objects.filter(Prefix=current_user.user_id):
+        filename = os.path.basename(uploaded_obj.key)
+        filename_no_extension = os.path.splitext(filename)[0]
+        uploaded.add(filename_no_extension)
+
     download_bucket = s3_resource.Bucket(gifify_config.DOWNLOAD_BUCKET)
     gif_links = {}
     for obj in download_bucket.objects.filter(Prefix=current_user.user_id):
         filename = os.path.basename(obj.key)
+        filename_no_extension = os.path.splitext(filename)[0]
         presigned_url = s3_client.generate_presigned_url('get_object', Params = {'Bucket':
                                                 download_bucket.name, 'Key': obj.key}, ExpiresIn = 3600)
-        gif_links[filename] = presigned_url
+        if filename_no_extension in uploaded:
+            uploaded.remove(filename_no_extension)
+
+        gif_links[filename] = {
+            'url': presigned_url,
+            'expected': False
+        }
+
+    for filename in uploaded:
+        gif_links[f'{filename}.gif'] = {
+            'url': '',
+            'expected': True
+        }
 
     return gif_links

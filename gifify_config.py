@@ -1,7 +1,7 @@
 access_credentials = {
-    "aws_access_key_id": "ASIAXWSOBH3NX6F4KEXU",
-    "aws_secret_access_key": "sNb/U4sOjRtjZnc0o/OqTW8Rsdv5KG+Zw0b0JQlQ",
-    "aws_session_token": "FwoGZXIvYXdzEFMaDD+cxziozPOwAUCgUSLJAdICGMZ2BOpsjplR+VR7saYXlz2bp/NP2pQBqq+7issC4y6liP6CVZ+UJpjg6hGPxmo+lKtUEU6Bqz4hFReShJ794TD57dIFkBl74T7qiuiTwI1wnI+vWEzs4oJH/u3O5BWE6usoFCbJFkdduLHcM7bibxpd2JShEfaM36IBgby642KZ8fqsw1gKC7iojDjpbeCrlQmlqKJo9UdBf0eFJIGWo520y5JMuX/x0CIQLJGOenD86bynWwYJCWy3elwy+mm32QtH+OG64CjAm7KTBjItVb8poqgr2EpNU5vIsE1I8dCR+izQ+CLUtaRJszEqvs6rNOOivAmkcwqI6yH+",
+    "aws_access_key_id": "ASIAXWSOBH3NUQK2KBG5",
+    "aws_secret_access_key": "Vy1ia3/9mPUoqLCyBP1a4AS78jru4wqvFhp6P7aw",
+    "aws_session_token": "FwoGZXIvYXdzEFcaDEpTrqMxh5SvAmyaISLJATrFJWIvARBpxXWLxZ8pllZlXP8B3xZvJMets/RJjWQoEbuwoRIzrpZ213ohNuoB75kgQIyBXkcGPb+KBaa5PJmS9iWtg96VQePsd5fqoNrQy6fvm9M3kaoyeI1w20AKnTff5HIpyYeqWciObi9jZekdMRICzUIrjlKu4eHXUba2VrvwRZXmw1ci1n1xOuy4PCXE+kJsuklnanXXRKWIWDUKqTsycm5ds9gQHjwVV5nUcbF5MezC1LCmaXpdUI0m1HkNcs21mI4fRyiyjLOTBjItl49IpwFOv8m2C//UTTsZTyweU3uj4IdXwXwEVQgGRjbFyhJOKDafgADfs34i",
     "region_name": "us-east-1"
 }
 
@@ -9,4 +9,4 @@ USER_TABLE = 'Gifify-users'
 UPLOAD_BUCKET = 'gifify-src-kbosko'
 DOWNLOAD_BUCKET = 'gifify-out-kbosko'
 
-ALLOWED_EXTENSIONS = set(['mov', 'mpeg']) ## TODO: EXTEND LIST!!!
+ALLOWED_EXTENSIONS = set(['mov', 'mp4', 'wmv', 'avi', 'flv', 'm4p', 'mpg', 'mpeg', 'mpv', '3gp', '3g2', 'webm'])
