@@ -5,9 +5,9 @@ from flask_login import UserMixin
 from uuid import uuid4
 import os
 
-dynamodb = boto3.resource('dynamodb', region_name=gifify_config.REGION)
-s3_client = boto3.client('s3', region_name=gifify_config.REGION)
-s3_resource = boto3.resource('s3', region_name=gifify_config.REGION)
+dynamodb = boto3.resource('dynamodb', **gifify_config.access_credentials)
+s3_client = boto3.client('s3', **gifify_config.access_credentials)
+s3_resource = boto3.resource('s3', **gifify_config.access_credentials)
 
 
 class User(UserMixin):
