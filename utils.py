@@ -155,3 +155,4 @@ def delete_all_userdata(current_user):
 def delete_account(current_user):
     table = dynamodb.Table(gifify_config.USER_TABLE)
     table.delete_item(Key={'email': current_user.id})
+    delete_all_userdata(current_user)
