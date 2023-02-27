@@ -8,3 +8,6 @@ A Gifify app allows the users to upload a video and get it processed into a gif.
 # Technologies
 This is a Flask app deployed to AWS EC2 instance. The user login data is saved into DynamoDB, while the users’ uploaded videos and resulting gifs are stored on S3 buckets. The video processing is implemented through a Lambda function (deployed via Docker to ECS).
 
+## Architecture
+
+<img width="557" alt="image" src="https://user-images.githubusercontent.com/46878035/221692946-1a326ca0-1767-41ca-bd08-be057ec1dc0a.png">
